@@ -98,11 +98,11 @@ class GoogleTagManagerStoreConnectorModelTest extends Unit
             ->method('getQuote')
             ->willReturn($this->quoteTransferMock);
 
-        $this->quoteTransferMock->expects($this->exactly(2))
+        $this->quoteTransferMock->expects($this->atLeastOnce())
             ->method('getBillingAddress')
             ->willReturn($this->addressTransferMock);
 
-        $this->addressTransferMock->expects($this->once())
+        $this->addressTransferMock->expects($this->atLeastOnce())
             ->method('getEmail')
             ->willReturn('john.doe@foobar.com');
 

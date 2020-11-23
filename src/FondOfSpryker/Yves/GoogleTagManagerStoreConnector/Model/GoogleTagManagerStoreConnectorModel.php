@@ -92,7 +92,7 @@ class GoogleTagManagerStoreConnectorModel implements GoogleTagManagerStoreConnec
      */
     public function getInteralTraffic(array $params): array
     {
-        $internalIps = $this->getConfig()->getInternalIps();
+        $internalIps = $this->config->getInternalIps();
 
         if (!isset($params[GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP])) {
             return [];
