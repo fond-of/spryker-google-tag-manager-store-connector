@@ -30,8 +30,6 @@ class GoogleTagManagerStoreConnectorDependencyProviderTest extends Unit
     }
 
     /**
-     * @retun void
-     *
      * @return void
      */
     public function testProvideDependencies(): void

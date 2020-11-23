@@ -12,6 +12,9 @@ class GoogleTagManagerStoreConnectorToCartClientBridge implements GoogleTagManag
      */
     protected $cartClient;
 
+    /**
+     * @param \Spryker\Client\Cart\CartClientInterface $cartClient
+     */
     public function __construct(CartClientInterface $cartClient)
     {
         $this->cartClient = $cartClient;
