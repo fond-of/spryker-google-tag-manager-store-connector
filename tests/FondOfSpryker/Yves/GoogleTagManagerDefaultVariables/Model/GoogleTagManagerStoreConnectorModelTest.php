@@ -13,27 +13,27 @@ use Spryker\Shared\Kernel\Store;
 class GoogleTagManagerStoreConnectorModelTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|Store
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Store
      */
     protected $storeMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|GoogleTagManagerStoreConnectorToCartClientInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToCartClientInterface
      */
     protected $cartClientMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|GoogleTagManagerStoreConnectorConfig
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig
      */
     protected $configMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|QuoteTransfer
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
      */
     protected $quoteTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|AddressTransfer
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AddressTransfer
      */
     protected $addressTransferMock;
 
@@ -137,7 +137,7 @@ class GoogleTagManagerStoreConnectorModelTest extends Unit
             ->willReturn(['127.0.0.1']);
 
         $result = $this->googleTagManagerStoreConnectorModel->getInteralTraffic([
-            GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP => '127.0.0.1'
+            GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP => '127.0.0.1',
         ]);
 
         $this->assertIsArray($result);

@@ -12,24 +12,24 @@ use Spryker\Shared\Kernel\Store;
 class GoogleTagManagerStoreConnectorModel implements GoogleTagManagerStoreConnectorModelInterface
 {
     /**
-     * @var Store
+     * @var \Spryker\Shared\Kernel\Store
      */
     protected $store;
 
     /**
-     * @var GoogleTagManagerStoreConnectorToCartClientInterface
+     * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToCartClientInterface
      */
     protected $cartClient;
 
     /**
-     * @var GoogleTagManagerStoreConnectorConfig
+     * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig
      */
     protected $config;
 
     /**
-     * @param Store $store
-     * @param GoogleTagManagerStoreConnectorToCartClientInterface $cartClient
-     * @param GoogleTagManagerStoreConnectorConfig $config
+     * @param \Spryker\Shared\Kernel\Store $store
+     * @param \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToCartClientInterface $cartClient
+     * @param \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig $config
      */
     public function __construct(
         Store $store,
@@ -47,7 +47,7 @@ class GoogleTagManagerStoreConnectorModel implements GoogleTagManagerStoreConnec
     public function getCurrency(): array
     {
         return [
-            GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY => $this->store->getCurrencyIsoCode()
+            GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY => $this->store->getCurrencyIsoCode(),
         ];
     }
 

@@ -9,12 +9,12 @@ use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractFactory;
 
 /**
- * @method GoogleTagManagerStoreConnectorConfig getConfig()
+ * @method \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig getConfig()
  */
 class GoogleTagManagerStoreConnectorFactory extends AbstractFactory
 {
     /**
-     * @return GoogleTagManagerStoreConnectorModelInterface
+     * @return \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model\GoogleTagManagerStoreConnectorModelInterface
      */
     public function createGoogleTagManagerStoreConnectorModel(): GoogleTagManagerStoreConnectorModelInterface
     {
@@ -34,7 +34,7 @@ class GoogleTagManagerStoreConnectorFactory extends AbstractFactory
     }
 
     /**
-     * @return GoogleTagManagerStoreConnectorToCartClientInterface
+     * @return \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToCartClientInterface
      */
     public function getCartClient(): GoogleTagManagerStoreConnectorToCartClientInterface
     {

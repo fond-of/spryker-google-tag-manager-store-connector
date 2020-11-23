@@ -52,6 +52,9 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
         $this->factory->setContainer($this->containerMock);
     }
 
+    /**
+     * @return void
+     */
     public function testCreateGoogleTagManagerStoreConnectorModel(): void
     {
         $this->assertInstanceOf(
