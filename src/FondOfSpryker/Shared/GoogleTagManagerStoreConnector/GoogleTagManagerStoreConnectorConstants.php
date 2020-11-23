@@ -10,4 +10,6 @@ interface GoogleTagManagerStoreConnectorConstants
     public const FIELD_INTERNAL_TRAFFIC = 'internalTraffic';
 
     public const PARAM_CLIENT_IP = 'clientIp';
+
+    public const INTERNAL_IPS = 'INTERNAL_IPS';
 }
