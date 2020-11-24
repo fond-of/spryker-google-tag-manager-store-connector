@@ -9,6 +9,6 @@
 composer require fond-of-spryker/google-tag-manager-store-connector
 ```
 
-### Desciption
+### Description
 
 Package provides store-based-plugins for fond-of-spryker/google-tag-manager
