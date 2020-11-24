@@ -16,6 +16,16 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
     protected $containerMock;
 
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig
+     */
+    protected $configMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToCartClientInterface
+     */
+    protected $cartClientMock;
+
+    /**
      * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorFactory
      */
     protected $factory;
@@ -39,7 +49,15 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->configMock = $this->getMockBuilder(GoogleTagManagerStoreConnectorConfig::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->storeMock = $this->getMockBuilder(Store::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->cartClientMock = $this->getMockBuilder(GoogleTagManagerStoreConnectorToCartClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -50,6 +68,7 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
 
         $this->factory = new GoogleTagManagerStoreConnectorFactory();
         $this->factory->setContainer($this->containerMock);
+        $this->factory->setConfig($this->configMock);
     }
 
     /**
@@ -57,6 +76,14 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
      */
     public function testCreateGoogleTagManagerStoreConnectorModel(): void
     {
+        $this->containerMock->expects($this->atLeastOnce())
+            ->method('has')
+            ->willReturn(true);
+
+        $this->containerMock->expects($this->atLeastOnce())
+            ->method('get')
+            ->willReturn($this->storeMock, $this->cartClientMock);
+
         $this->assertInstanceOf(
             GoogleTagManagerStoreConnectorModelInterface::class,
             $this->factory->createGoogleTagManagerStoreConnectorModel()
@@ -74,7 +101,6 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
 
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->with(GoogleTagManagerStoreConnectorDependencyProvider::STORE)
             ->willReturn($this->storeMock);
 
         $this->assertInstanceOf(
