@@ -20,7 +20,7 @@ class GoogleTagManagerStoreConnectorDependencyProviderTest extends Unit
     /**
      * @return void
      */
-    protected function _before()
+    protected function _before(): void
     {
         $this->containerMock = $this->getMockBuilder(Container::class)
             ->disableOriginalConstructor()
