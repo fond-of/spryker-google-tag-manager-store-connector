@@ -4,7 +4,6 @@ namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Shared\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConstants;
-use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToCartClientInterface;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -16,11 +15,6 @@ class GoogleTagManagerStoreConnectorModelTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Store
      */
     protected $storeMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToCartClientInterface
-     */
-    protected $cartClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig
@@ -51,10 +45,6 @@ class GoogleTagManagerStoreConnectorModelTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->cartClientMock = $this->getMockBuilder(GoogleTagManagerStoreConnectorToCartClientInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->configMock = $this->getMockBuilder(GoogleTagManagerStoreConnectorConfig::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -69,7 +59,6 @@ class GoogleTagManagerStoreConnectorModelTest extends Unit
 
         $this->googleTagManagerStoreConnectorModel = new GoogleTagManagerStoreConnectorModel(
             $this->storeMock,
-            $this->cartClientMock,
             $this->configMock
         );
     }
@@ -87,29 +76,6 @@ class GoogleTagManagerStoreConnectorModelTest extends Unit
 
         $this->assertIsArray($result);
         $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY, $result);
-    }
-
-    /**
-     * @return void
-     */
-    public function testGetEmailHash(): void
-    {
-        $this->cartClientMock->expects($this->once())
-            ->method('getQuote')
-            ->willReturn($this->quoteTransferMock);
-
-        $this->quoteTransferMock->expects($this->atLeastOnce())
-            ->method('getBillingAddress')
-            ->willReturn($this->addressTransferMock);
-
-        $this->addressTransferMock->expects($this->atLeastOnce())
-            ->method('getEmail')
-            ->willReturn('john.doe@foobar.com');
-
-        $result = $this->googleTagManagerStoreConnectorModel->getEmailHash();
-
-        $this->assertIsArray($result);
-        $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_EXTERNAL_ID_HASH, $result);
     }
 
     /**

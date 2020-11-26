@@ -12,11 +12,6 @@ interface GoogleTagManagerStoreConnectorModelInterface
     /**
      * @return array
      */
-    public function getEmailHash(): array;
-
-    /**
-     * @return array
-     */
     public function getStoreName(): array;
 
     /**
