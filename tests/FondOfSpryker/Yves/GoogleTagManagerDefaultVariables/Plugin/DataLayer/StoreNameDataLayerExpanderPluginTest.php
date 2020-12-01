@@ -1,17 +1,17 @@
 <?php
 
-namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Plugin\Variables;
+namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Plugin\DataLayer;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorFactory;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model\GoogleTagManagerStoreConnectorModelInterface;
 
-class GoogleTagManagerStoreInternalTrafficPluginTest extends Unit
+class StoreNameDataLayerExpanderPluginTest extends Unit
 {
     /**
      * @return void
      */
-    public function testAddVariable(): void
+    public function testExpand(): void
     {
         $factoryMock = $this->getMockBuilder(GoogleTagManagerStoreConnectorFactory::class)
             ->disableOriginalConstructor()
@@ -26,12 +26,12 @@ class GoogleTagManagerStoreInternalTrafficPluginTest extends Unit
             ->willReturn($googleTagManagerStoreConnectorModel);
 
         $googleTagManagerStoreConnectorModel->expects($this->once())
-            ->method('getInteralTraffic')
+            ->method('getStoreName')
             ->willReturn([]);
 
-        $googleTagManagerStoreInternalTrafficPlugin = new GoogleTagManagerStoreInternalTrafficPlugin();
+        $googleTagManagerStoreInternalTrafficPlugin = new StoreNameDataLayerExpanderPlugin();
         $googleTagManagerStoreInternalTrafficPlugin->setFactory($factoryMock);
 
-        $this->assertIsArray($googleTagManagerStoreInternalTrafficPlugin->addVariable('pageType', []));
+        $this->assertIsArray($googleTagManagerStoreInternalTrafficPlugin->expand('pageType', [], []));
     }
 }

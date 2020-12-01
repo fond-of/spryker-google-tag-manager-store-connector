@@ -31,44 +31,54 @@ class GoogleTagManagerStoreConnectorModel implements GoogleTagManagerStoreConnec
     }
 
     /**
-     * @return array
-     */
-    public function getCurrency(): array
-    {
-        return [
-            GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY => $this->store->getCurrencyIsoCode(),
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getStoreName(): array
-    {
-        return [
-            GoogleTagManagerStoreConnectorConstants::FIELD_STORE => $this->store->getStoreName(),
-        ];
-    }
-
-    /**
-     * @param array $params
+     * @param string $page
+     * @param array $twigVariableBag
+     * @param array $variableList
      *
      * @return array
      */
-    public function getInteralTraffic(array $params): array
+    public function getCurrency(string $page, array $twigVariableBag, array $variableList): array
+    {
+        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY] = $this->store->getCurrencyIsoCode();
+
+        return $variableList;
+    }
+
+    /**
+     * @param string $page
+     * @param array $twigVariableBag
+     * @param array $variableList
+     *
+     * @return array
+     */
+    public function getStoreName(string $page, array $twigVariableBag, array $variableList): array
+    {
+        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_STORE] = $this->store->getStoreName();
+
+        return $variableList;
+    }
+
+    /**
+     * @param string $page
+     * @param array $twigVariableBag
+     * @param array $variableList
+     *
+     * @return array
+     */
+    public function getInteralTraffic(string $page, array $twigVariableBag, array $variableList): array
     {
         $internalIps = $this->config->getInternalIps();
 
-        if (!isset($params[GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP])) {
-            return [];
+        if (!isset($twigVariableBag[GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP])) {
+            return $variableList;
         }
 
-        if (!in_array($params[GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP], $internalIps, true)) {
-            return [];
+        if (!in_array($twigVariableBag[GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP], $internalIps, true)) {
+            return $variableList;
         }
 
-        return [
-            GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC => true,
-        ];
+        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC] = true;
+
+        return $variableList;
     }
 }

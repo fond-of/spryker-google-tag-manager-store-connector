@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Plugin\Variables;
+namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Plugin\DataLayer;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorFactory;
@@ -11,7 +11,7 @@ class GoogleTagManagerStoreCurrencyPluginTest extends Unit
     /**
      * @return void
      */
-    public function testAddVariable(): void
+    public function testExpand(): void
     {
         $factoryMock = $this->getMockBuilder(GoogleTagManagerStoreConnectorFactory::class)
             ->disableOriginalConstructor()
@@ -29,9 +29,9 @@ class GoogleTagManagerStoreCurrencyPluginTest extends Unit
             ->method('getCurrency')
             ->willReturn([]);
 
-        $googleTagManagerStoreCurrencyPlugin = new GoogleTagManagerStoreCurrencyPlugin();
+        $googleTagManagerStoreCurrencyPlugin = new StoreCurrencyDataLayerExpanderPlugin();
         $googleTagManagerStoreCurrencyPlugin->setFactory($factoryMock);
 
-        $this->assertIsArray($googleTagManagerStoreCurrencyPlugin->addVariable('pageType', []));
+        $this->assertIsArray($googleTagManagerStoreCurrencyPlugin->expand('pageType', [], []));
     }
 }

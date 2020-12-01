@@ -72,7 +72,7 @@ class GoogleTagManagerStoreConnectorModelTest extends Unit
             ->method('getCurrencyIsoCode')
             ->willReturn('EUR');
 
-        $result = $this->googleTagManagerStoreConnectorModel->getCurrency();
+        $result = $this->googleTagManagerStoreConnectorModel->getCurrency('pageType', [], []);
 
         $this->assertIsArray($result);
         $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY, $result);
@@ -87,7 +87,7 @@ class GoogleTagManagerStoreConnectorModelTest extends Unit
             ->method('getStoreName')
             ->willReturn('STORE_NAME');
 
-        $result = $this->googleTagManagerStoreConnectorModel->getStoreName();
+        $result = $this->googleTagManagerStoreConnectorModel->getStoreName('pageType', [], []);
 
         $this->assertIsArray($result);
         $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_STORE, $result);
@@ -102,9 +102,9 @@ class GoogleTagManagerStoreConnectorModelTest extends Unit
             ->method('getInternalIps')
             ->willReturn(['127.0.0.1']);
 
-        $result = $this->googleTagManagerStoreConnectorModel->getInteralTraffic([
+        $result = $this->googleTagManagerStoreConnectorModel->getInteralTraffic('pageType', [
             GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP => '127.0.0.1',
-        ]);
+        ], []);
 
         $this->assertIsArray($result);
         $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC, $result);
