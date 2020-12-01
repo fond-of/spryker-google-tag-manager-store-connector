@@ -33,17 +33,17 @@ class StoreDataLayerExpander implements StoreDataLayerExpanderInterface
     /**
      * @param string $page
      * @param array $twigVariableBag
-     * @param array $variableList
+     * @param array $dataLayer
      *
      * @return array
      */
-    public function expand(string $page, array $twigVariableBag, array $variableList): array
+    public function expand(string $page, array $twigVariableBag, array $dataLayer): array
     {
-        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY] = $this->getCurrency();
-        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_STORE] = $this->getStoreName();
-        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC] = $this->getInteralTraffic($twigVariableBag);
+        $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY] = $this->getCurrency();
+        $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_STORE] = $this->getStoreName();
+        $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC] = $this->getInteralTraffic($twigVariableBag);
 
-        return $variableList;
+        return $dataLayer;
     }
 
     /**
