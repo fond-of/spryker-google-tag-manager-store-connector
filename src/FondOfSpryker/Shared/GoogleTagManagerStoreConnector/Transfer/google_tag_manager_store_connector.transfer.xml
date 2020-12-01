@@ -6,11 +6,8 @@
     <transfer name="GoogleTagManager">
     </transfer>
 
-    <transfer name="Address">
-        <property name="email" type="string"/>
-    </transfer>
-
-    <transfer name="Quote">
-        <property name="billingAddress" type="Address"/>
+    <transfer name="Store">
+        <property name="name" type="string"/>
+        <property name="selectedCurrencyIsoCode" type="string"/>
     </transfer>
 </transfers>

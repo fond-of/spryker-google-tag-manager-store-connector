@@ -3,15 +3,15 @@
 namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander;
 
 use FondOfSpryker\Shared\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConstants;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig;
-use Spryker\Shared\Kernel\Store;
 
 class StoreDataLayerExpander implements StoreDataLayerExpanderInterface
 {
     /**
-     * @var \Spryker\Shared\Kernel\Store
+     * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
      */
-    protected $store;
+    protected $storeClient;
 
     /**
      * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig
@@ -19,14 +19,14 @@ class StoreDataLayerExpander implements StoreDataLayerExpanderInterface
     protected $config;
 
     /**
-     * @param \Spryker\Shared\Kernel\Store $store
+     * @param \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface $storeClient
      * @param \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig $config
      */
     public function __construct(
-        Store $store,
+        GoogleTagManagerStoreConnectorToStoreClientInterface $storeClient,
         GoogleTagManagerStoreConnectorConfig $config
     ) {
-        $this->store = $store;
+        $this->storeClient = $storeClient;
         $this->config = $config;
     }
 
@@ -51,7 +51,7 @@ class StoreDataLayerExpander implements StoreDataLayerExpanderInterface
      */
     protected function getCurrency(): string
     {
-        return $this->store->getCurrencyIsoCode();
+        return $this->storeClient->getCurrentStore()->getSelectedCurrencyIsoCode();
     }
 
     /**
@@ -59,7 +59,7 @@ class StoreDataLayerExpander implements StoreDataLayerExpanderInterface
      */
     public function getStoreName(): string
     {
-        return $this->store->getStoreName();
+        return $this->storeClient->getCurrentStore()->getName();
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector;
 
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpander;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpanderInterface;
-use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractFactory;
 
 /**
@@ -18,16 +18,24 @@ class GoogleTagManagerStoreConnectorFactory extends AbstractFactory
     public function createStoreDataLayerExpander(): StoreDataLayerExpanderInterface
     {
         return new StoreDataLayerExpander(
-            $this->getStore(),
+            $this->getStoreClient(),
             $this->getConfig()
         );
     }
 
     /**
-     * @return \Spryker\Shared\Kernel\Store
+     * @return \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
      */
-    public function getStore(): Store
+    public function getStoreClient(): GoogleTagManagerStoreConnectorToStoreClientInterface
     {
-        return $this->getProvidedDependency(GoogleTagManagerStoreConnectorDependencyProvider::STORE);
+        return $this->getProvidedDependency(GoogleTagManagerStoreConnectorDependencyProvider::STORE_CLIENT);
+    }
+
+    /**
+     * @return \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
+     */
+    public function getCurrencyClient(): GoogleTagManagerStoreConnectorToStoreClientInterface
+    {
+        return $this->getProvidedDependency(GoogleTagManagerStoreConnectorDependencyProvider::STORE_CLIENT);
     }
 }

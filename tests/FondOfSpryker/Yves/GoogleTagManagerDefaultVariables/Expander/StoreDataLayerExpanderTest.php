@@ -4,15 +4,16 @@ namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Shared\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConstants;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig;
-use Spryker\Shared\Kernel\Store;
+use Generated\Shared\Transfer\StoreTransfer;
 
 class StoreDataLayerExpanderTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Store
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
      */
-    protected $storeMock;
+    protected $storeClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig
@@ -25,11 +26,16 @@ class StoreDataLayerExpanderTest extends Unit
     protected $expander;
 
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\StoreTransfer
+     */
+    protected $storeTransferMock;
+
+    /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->storeMock = $this->getMockBuilder(Store::class)
+        $this->storeClientMock = $this->getMockBuilder(GoogleTagManagerStoreConnectorToStoreClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -37,7 +43,11 @@ class StoreDataLayerExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->expander = new StoreDataLayerExpander($this->storeMock, $this->configMock);
+        $this->storeTransferMock = $this->getMockBuilder(StoreTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->expander = new StoreDataLayerExpander($this->storeClientMock, $this->configMock);
     }
 
     /**
@@ -45,13 +55,17 @@ class StoreDataLayerExpanderTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->storeMock->expects($this->once())
-            ->method('getCurrencyIsoCode')
-            ->willReturn('EUR');
+        $this->storeClientMock->expects($this->atLeastOnce())
+            ->method('getCurrentStore')
+            ->willReturn($this->storeTransferMock);
 
-        $this->storeMock->expects($this->once())
-            ->method('getStoreName')
+        $this->storeTransferMock->expects($this->once())
+            ->method('getName')
             ->willReturn('STORE_NAME');
+
+        $this->storeTransferMock->expects($this->once())
+            ->method('getSelectedCurrencyIsoCode')
+            ->willReturn('EUR');
 
         $this->configMock->expects($this->once())
             ->method('getInternalIps')
