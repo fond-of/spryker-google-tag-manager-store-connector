@@ -2,8 +2,8 @@
 
 namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector;
 
-use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model\GoogleTagManagerStoreConnectorModel;
-use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model\GoogleTagManagerStoreConnectorModelInterface;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpander;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpanderInterface;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Yves\Kernel\AbstractFactory;
 
@@ -15,9 +15,9 @@ class GoogleTagManagerStoreConnectorFactory extends AbstractFactory
     /**
      * @return \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model\GoogleTagManagerStoreConnectorModelInterface
      */
-    public function createGoogleTagManagerStoreConnectorModel(): GoogleTagManagerStoreConnectorModelInterface
+    public function createStoreDataLayerExpander(): StoreDataLayerExpanderInterface
     {
-        return new GoogleTagManagerStoreConnectorModel(
+        return new StoreDataLayerExpander(
             $this->getStore(),
             $this->getConfig()
         );

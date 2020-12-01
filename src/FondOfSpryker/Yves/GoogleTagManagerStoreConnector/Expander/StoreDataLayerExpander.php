@@ -1,12 +1,12 @@
 <?php
 
-namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model;
+namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander;
 
 use FondOfSpryker\Shared\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConstants;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig;
 use Spryker\Shared\Kernel\Store;
 
-class GoogleTagManagerStoreConnectorModel implements GoogleTagManagerStoreConnectorModelInterface
+class StoreDataLayerExpander implements StoreDataLayerExpanderInterface
 {
     /**
      * @var \Spryker\Shared\Kernel\Store
@@ -37,48 +37,48 @@ class GoogleTagManagerStoreConnectorModel implements GoogleTagManagerStoreConnec
      *
      * @return array
      */
-    public function getCurrency(string $page, array $twigVariableBag, array $variableList): array
+    public function expand(string $page, array $twigVariableBag, array $variableList): array
     {
-        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY] = $this->store->getCurrencyIsoCode();
+        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY] = $this->getCurrency();
+        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_STORE] = $this->getStoreName();
+        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC] = $this->getInteralTraffic($twigVariableBag);
 
         return $variableList;
     }
 
     /**
-     * @param string $page
-     * @param array $twigVariableBag
-     * @param array $variableList
-     *
-     * @return array
+     * @return string
      */
-    public function getStoreName(string $page, array $twigVariableBag, array $variableList): array
+    protected function getCurrency(): string
     {
-        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_STORE] = $this->store->getStoreName();
-
-        return $variableList;
+        return $this->store->getCurrencyIsoCode();
     }
 
     /**
-     * @param string $page
-     * @param array $twigVariableBag
-     * @param array $variableList
-     *
-     * @return array
+     * @return string
      */
-    public function getInteralTraffic(string $page, array $twigVariableBag, array $variableList): array
+    public function getStoreName(): string
+    {
+        return $this->store->getStoreName();
+    }
+
+    /**
+     * @param array $twigVariableBag
+     *
+     * @return bool|null
+     */
+    public function getInteralTraffic(array $twigVariableBag): ?bool
     {
         $internalIps = $this->config->getInternalIps();
 
         if (!isset($twigVariableBag[GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP])) {
-            return $variableList;
+            return false;
         }
 
         if (!in_array($twigVariableBag[GoogleTagManagerStoreConnectorConstants::PARAM_CLIENT_IP], $internalIps, true)) {
-            return $variableList;
+            return false;
         }
 
-        $variableList[GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC] = true;
-
-        return $variableList;
+        return true;
     }
 }

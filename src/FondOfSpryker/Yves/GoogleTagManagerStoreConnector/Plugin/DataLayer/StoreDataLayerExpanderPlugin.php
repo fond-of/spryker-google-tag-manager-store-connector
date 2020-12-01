@@ -8,7 +8,7 @@ use Spryker\Yves\Kernel\AbstractPlugin;
 /**
  * @method \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorFactory getFactory()
  */
-class StoreCurrencyDataLayerExpanderPlugin extends AbstractPlugin implements GoogleTagManagerDataLayerExpanderPluginInterface
+class StoreDataLayerExpanderPlugin extends AbstractPlugin implements GoogleTagManagerDataLayerExpanderPluginInterface
 {
     /**
      * @param string $pageType
@@ -31,7 +31,7 @@ class StoreCurrencyDataLayerExpanderPlugin extends AbstractPlugin implements Goo
     public function expand(string $page, array $twigVariableBag, array $variableList): array
     {
         return $this->getFactory()
-            ->createGoogleTagManagerStoreConnectorModel()
-            ->getCurrency($page, $twigVariableBag, $variableList);
+            ->createStoreDataLayerExpander()
+            ->expand($page, $twigVariableBag, $variableList);
     }
 }
