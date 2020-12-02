@@ -3,8 +3,8 @@
 namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector;
 
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface;
-use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpander;
-use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpanderInterface;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpander;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpanderInterface;
 use Spryker\Yves\Kernel\AbstractFactory;
 
 /**
@@ -13,11 +13,11 @@ use Spryker\Yves\Kernel\AbstractFactory;
 class GoogleTagManagerStoreConnectorFactory extends AbstractFactory
 {
     /**
-     * @return \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model\GoogleTagManagerStoreConnectorModelInterface
+     * @return DataLayerExpanderInterface
      */
-    public function createStoreDataLayerExpander(): StoreDataLayerExpanderInterface
+    public function createDataLayerExpander(): DataLayerExpanderInterface
     {
-        return new StoreDataLayerExpander(
+        return new DataLayerExpander(
             $this->getStoreClient(),
             $this->getConfig()
         );
@@ -27,14 +27,6 @@ class GoogleTagManagerStoreConnectorFactory extends AbstractFactory
      * @return \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
      */
     public function getStoreClient(): GoogleTagManagerStoreConnectorToStoreClientInterface
-    {
-        return $this->getProvidedDependency(GoogleTagManagerStoreConnectorDependencyProvider::STORE_CLIENT);
-    }
-
-    /**
-     * @return \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
-     */
-    public function getCurrencyClient(): GoogleTagManagerStoreConnectorToStoreClientInterface
     {
         return $this->getProvidedDependency(GoogleTagManagerStoreConnectorDependencyProvider::STORE_CLIENT);
     }

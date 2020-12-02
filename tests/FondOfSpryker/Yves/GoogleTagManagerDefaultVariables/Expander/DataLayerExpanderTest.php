@@ -8,7 +8,7 @@ use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManage
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig;
 use Generated\Shared\Transfer\StoreTransfer;
 
-class StoreDataLayerExpanderTest extends Unit
+class DataLayerExpanderTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
@@ -47,7 +47,7 @@ class StoreDataLayerExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->expander = new StoreDataLayerExpander($this->storeClientMock, $this->configMock);
+        $this->expander = new DataLayerExpander($this->storeClientMock, $this->configMock);
     }
 
     /**

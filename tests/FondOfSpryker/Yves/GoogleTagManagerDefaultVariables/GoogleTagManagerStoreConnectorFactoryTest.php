@@ -4,7 +4,7 @@ namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface;
-use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpanderInterface;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpanderInterface;
 use Spryker\Yves\Kernel\Container;
 
 class GoogleTagManagerStoreConnectorFactoryTest extends Unit
@@ -54,7 +54,7 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
     /**
      * @return void
      */
-    public function testCreateStoreDataLayerExpander(): void
+    public function testCreateDataLayerExpander(): void
     {
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
@@ -65,8 +65,8 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
             ->willReturn($this->storeMock);
 
         $this->assertInstanceOf(
-            StoreDataLayerExpanderInterface::class,
-            $this->factory->createStoreDataLayerExpander()
+            DataLayerExpanderInterface::class,
+            $this->factory->createDataLayerExpander()
         );
     }
 

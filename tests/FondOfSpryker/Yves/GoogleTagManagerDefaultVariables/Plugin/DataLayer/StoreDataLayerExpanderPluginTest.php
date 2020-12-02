@@ -3,7 +3,7 @@
 namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Plugin\DataLayer;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpanderInterface;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpanderInterface;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorFactory;
 
 class StoreDataLayerExpanderPluginTest extends Unit
@@ -32,7 +32,7 @@ class StoreDataLayerExpanderPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->storeDataLayerExpanderMock = $this->getMockBuilder(StoreDataLayerExpanderInterface::class)
+        $this->storeDataLayerExpanderMock = $this->getMockBuilder(DataLayerExpanderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -54,7 +54,7 @@ class StoreDataLayerExpanderPluginTest extends Unit
     public function testExpand(): void
     {
         $this->factoryMock->expects($this->once())
-            ->method('createStoreDataLayerExpander')
+            ->method('createDataLayerExpander')
             ->willReturn($this->storeDataLayerExpanderMock);
 
         $this->storeDataLayerExpanderMock->expects($this->once())

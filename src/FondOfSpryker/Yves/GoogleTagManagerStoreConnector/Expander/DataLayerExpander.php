@@ -6,7 +6,7 @@ use FondOfSpryker\Shared\GoogleTagManagerStoreConnector\GoogleTagManagerStoreCon
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig;
 
-class StoreDataLayerExpander implements StoreDataLayerExpanderInterface
+class DataLayerExpander implements DataLayerExpanderInterface
 {
     /**
      * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
