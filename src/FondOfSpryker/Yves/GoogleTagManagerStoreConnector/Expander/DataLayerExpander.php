@@ -39,6 +39,7 @@ class DataLayerExpander implements DataLayerExpanderInterface
      */
     public function expand(string $page, array $twigVariableBag, array $dataLayer): array
     {
+        $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_PAGE_TYPE] = $page;
         $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY] = $this->getCurrency();
         $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_STORE] = $this->getStoreName();
         $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC] = $this->getInteralTraffic($twigVariableBag);

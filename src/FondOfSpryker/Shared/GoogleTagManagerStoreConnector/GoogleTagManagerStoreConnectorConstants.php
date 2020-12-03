@@ -4,8 +4,8 @@ namespace FondOfSpryker\Shared\GoogleTagManagerStoreConnector;
 
 interface GoogleTagManagerStoreConnectorConstants
 {
+    public const FIELD_PAGE_TYPE = 'pageType';
     public const FIELD_CURRENCY = 'currency';
-    public const FIELD_EXTERNAL_ID_HASH = 'externalIdHash';
     public const FIELD_STORE = 'store';
     public const FIELD_INTERNAL_TRAFFIC = 'internalTraffic';
 
