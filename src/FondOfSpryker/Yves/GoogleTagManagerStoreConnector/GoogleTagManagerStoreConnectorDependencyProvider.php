@@ -2,13 +2,13 @@
 
 namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector;
 
-use Spryker\Shared\Kernel\Store;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientBridge;
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Yves\Kernel\Container;
 
 class GoogleTagManagerStoreConnectorDependencyProvider extends AbstractBundleDependencyProvider
 {
-    public const STORE = 'STORE';
+    public const STORE_CLIENT = 'STORE_CLIENT';
 
     /**
      * @param \Spryker\Yves\Kernel\Container $container
@@ -17,7 +17,7 @@ class GoogleTagManagerStoreConnectorDependencyProvider extends AbstractBundleDep
      */
     public function provideDependencies(Container $container)
     {
-        $container = $this->addStore($container);
+        $container = $this->addStoreClient($container);
 
         return $container;
     }
@@ -27,20 +27,12 @@ class GoogleTagManagerStoreConnectorDependencyProvider extends AbstractBundleDep
      *
      * @return \Spryker\Yves\Kernel\Container
      */
-    protected function addStore(Container $container): Container
+    protected function addStoreClient(Container $container): Container
     {
-        $container->set(static::STORE, function () {
-            return $this->getStore();
+        $container->set(static::STORE_CLIENT, function (Container $container) {
+            return new GoogleTagManagerStoreConnectorToStoreClientBridge($container->getLocator()->store()->client());
         });
 
         return $container;
-    }
-
-    /**
-     * @return \Spryker\Shared\Kernel\Store
-     */
-    protected function getStore(): Store
-    {
-        return Store::getInstance();
     }
 }

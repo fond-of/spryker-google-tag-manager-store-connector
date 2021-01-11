@@ -3,8 +3,8 @@
 namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model\GoogleTagManagerStoreConnectorModelInterface;
-use Spryker\Shared\Kernel\Store;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpanderInterface;
 use Spryker\Yves\Kernel\Container;
 
 class GoogleTagManagerStoreConnectorFactoryTest extends Unit
@@ -20,14 +20,14 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
     protected $configMock;
 
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
+     */
+    protected $storeMock;
+
+    /**
      * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorFactory
      */
     protected $factory;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Store
-     */
-    protected $storeMock;
 
     /**
      * @return void
@@ -42,7 +42,7 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->storeMock = $this->getMockBuilder(Store::class)
+        $this->storeMock = $this->getMockBuilder(GoogleTagManagerStoreConnectorToStoreClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -54,7 +54,7 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
     /**
      * @return void
      */
-    public function testCreateGoogleTagManagerStoreConnectorModel(): void
+    public function testCreateDataLayerExpander(): void
     {
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
@@ -65,15 +65,15 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
             ->willReturn($this->storeMock);
 
         $this->assertInstanceOf(
-            GoogleTagManagerStoreConnectorModelInterface::class,
-            $this->factory->createGoogleTagManagerStoreConnectorModel()
+            DataLayerExpanderInterface::class,
+            $this->factory->createDataLayerExpander()
         );
     }
 
     /**
      * @return void
      */
-    public function testGetStore(): void
+    public function testGetStoreClient(): void
     {
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
@@ -84,8 +84,8 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
             ->willReturn($this->storeMock);
 
         $this->assertInstanceOf(
-            Store::class,
-            $this->factory->getStore()
+            GoogleTagManagerStoreConnectorToStoreClientInterface::class,
+            $this->factory->getStoreClient()
         );
     }
 }
