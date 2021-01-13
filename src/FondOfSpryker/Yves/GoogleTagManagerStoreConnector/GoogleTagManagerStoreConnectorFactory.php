@@ -13,7 +13,7 @@ use Spryker\Yves\Kernel\AbstractFactory;
 class GoogleTagManagerStoreConnectorFactory extends AbstractFactory
 {
     /**
-     * @return DataLayerExpanderInterface
+     * @return \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpanderInterface
      */
     public function createDataLayerExpander(): DataLayerExpanderInterface
     {
