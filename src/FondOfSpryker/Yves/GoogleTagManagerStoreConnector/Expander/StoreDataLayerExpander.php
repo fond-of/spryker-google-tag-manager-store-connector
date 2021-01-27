@@ -6,7 +6,7 @@ use FondOfSpryker\Shared\GoogleTagManagerStoreConnector\GoogleTagManagerStoreCon
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig;
 
-class DataLayerExpander implements DataLayerExpanderInterface
+class StoreDataLayerExpander implements DataLayerExpanderInterface
 {
     /**
      * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
@@ -43,6 +43,7 @@ class DataLayerExpander implements DataLayerExpanderInterface
         $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY] = $this->getCurrency();
         $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_STORE] = $this->getStoreName();
         $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC] = $this->getInteralTraffic($twigVariableBag);
+        $dataLayer[GoogleTagManagerStoreConnectorConstants::FIELD_SYSTEM] = $this->getEnviroment();
 
         return $dataLayer;
     }
@@ -58,7 +59,7 @@ class DataLayerExpander implements DataLayerExpanderInterface
     /**
      * @return string
      */
-    public function getStoreName(): string
+    protected function getStoreName(): string
     {
         return $this->storeClient->getCurrentStore()->getName();
     }
@@ -68,7 +69,7 @@ class DataLayerExpander implements DataLayerExpanderInterface
      *
      * @return bool|null
      */
-    public function getInteralTraffic(array $twigVariableBag): ?bool
+    protected function getInteralTraffic(array $twigVariableBag): ?bool
     {
         $internalIps = $this->config->getInternalIps();
 
@@ -81,5 +82,25 @@ class DataLayerExpander implements DataLayerExpanderInterface
         }
 
         return true;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getEnviroment(): string
+    {
+        if (!defined(APPLICATION_ENV)) {
+            return '';
+        }
+
+        if (APPLICATION_ENV === GoogleTagManagerStoreConnectorConstants::ENV_PRODUCTION) {
+            return 'Prod';
+        }
+
+        if (APPLICATION_ENV === GoogleTagManagerStoreConnectorConstants::ENV_STAGING) {
+            return 'Stage';
+        }
+
+        return 'Dev';
     }
 }

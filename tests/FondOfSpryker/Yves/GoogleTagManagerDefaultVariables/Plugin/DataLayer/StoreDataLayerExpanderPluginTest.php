@@ -54,7 +54,7 @@ class StoreDataLayerExpanderPluginTest extends Unit
     public function testExpand(): void
     {
         $this->factoryMock->expects($this->once())
-            ->method('createDataLayerExpander')
+            ->method('createStoreDataLayerExpander')
             ->willReturn($this->storeDataLayerExpanderMock);
 
         $this->storeDataLayerExpanderMock->expects($this->once())

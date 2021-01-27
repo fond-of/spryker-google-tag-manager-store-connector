@@ -8,7 +8,7 @@ use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManage
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig;
 use Generated\Shared\Transfer\StoreTransfer;
 
-class DataLayerExpanderTest extends Unit
+class StoreDataLayerExpanderTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface
@@ -47,7 +47,7 @@ class DataLayerExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->expander = new DataLayerExpander($this->storeClientMock, $this->configMock);
+        $this->expander = new StoreDataLayerExpander($this->storeClientMock, $this->configMock);
     }
 
     /**
@@ -74,8 +74,9 @@ class DataLayerExpanderTest extends Unit
         $variableList = $this->expander->expand('pageType', [], []);
 
         $this->assertIsArray($variableList);
-        $this->arrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY, $variableList);
-        $this->arrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_STORE, $variableList);
-        $this->arrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC, $variableList);
+        $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY, $variableList);
+        $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_STORE, $variableList);
+        $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC, $variableList);
+        $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_SYSTEM, $variableList);
     }
 }
