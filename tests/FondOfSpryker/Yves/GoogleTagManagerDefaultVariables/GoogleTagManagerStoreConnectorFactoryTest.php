@@ -66,7 +66,7 @@ class GoogleTagManagerStoreConnectorFactoryTest extends Unit
 
         $this->assertInstanceOf(
             DataLayerExpanderInterface::class,
-            $this->factory->createDataLayerExpander()
+            $this->factory->createStoreDataLayerExpander()
         );
     }
 

@@ -8,6 +8,10 @@ interface GoogleTagManagerStoreConnectorConstants
     public const FIELD_CURRENCY = 'currency';
     public const FIELD_STORE = 'store';
     public const FIELD_INTERNAL_TRAFFIC = 'internalTraffic';
+    public const FIELD_SYSTEM = 'system';
+
+    public const ENV_PRODUCTION = 'production';
+    public const ENV_STAGING = 'staging';
 
     public const PARAM_CLIENT_IP = 'clientIp';
 

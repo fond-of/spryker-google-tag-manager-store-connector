@@ -31,7 +31,7 @@ class StoreDataLayerExpanderPlugin extends AbstractPlugin implements GoogleTagMa
     public function expand(string $page, array $twigVariableBag, array $dataLayer): array
     {
         return $this->getFactory()
-            ->createDataLayerExpander()
+            ->createStoreDataLayerExpander()
             ->expand($page, $twigVariableBag, $dataLayer);
     }
 }
