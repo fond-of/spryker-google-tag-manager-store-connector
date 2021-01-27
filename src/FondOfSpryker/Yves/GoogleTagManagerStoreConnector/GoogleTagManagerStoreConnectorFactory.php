@@ -3,8 +3,8 @@
 namespace FondOfSpryker\Yves\GoogleTagManagerStoreConnector;
 
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Dependency\GoogleTagManagerStoreConnectorToStoreClientInterface;
-use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpander;
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpanderInterface;
+use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpander;
 use Spryker\Yves\Kernel\AbstractFactory;
 
 /**
