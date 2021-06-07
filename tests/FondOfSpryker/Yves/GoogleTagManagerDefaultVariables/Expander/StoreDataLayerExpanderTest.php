@@ -21,7 +21,7 @@ class StoreDataLayerExpanderTest extends Unit
     protected $configMock;
 
     /**
-     * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model\StoreDataLayerExpanderInterface
+     * @var \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpanderInterface
      */
     protected $expander;
 
@@ -55,28 +55,28 @@ class StoreDataLayerExpanderTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->storeClientMock->expects($this->atLeastOnce())
+        $this->storeClientMock->expects(static::atLeastOnce())
             ->method('getCurrentStore')
             ->willReturn($this->storeTransferMock);
 
-        $this->storeTransferMock->expects($this->once())
+        $this->storeTransferMock->expects(static::once())
             ->method('getName')
             ->willReturn('STORE_NAME');
 
-        $this->storeTransferMock->expects($this->once())
+        $this->storeTransferMock->expects(static::once())
             ->method('getSelectedCurrencyIsoCode')
             ->willReturn('EUR');
 
-        $this->configMock->expects($this->once())
+        $this->configMock->expects(static::once())
             ->method('getInternalIps')
             ->willReturn(['127.0.0.1']);
 
         $variableList = $this->expander->expand('pageType', [], []);
 
-        $this->assertIsArray($variableList);
-        $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY, $variableList);
-        $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_STORE, $variableList);
-        $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC, $variableList);
-        $this->assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_SYSTEM, $variableList);
+        static::assertIsArray($variableList);
+        static::assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_CURRENCY, $variableList);
+        static::assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_STORE, $variableList);
+        static::assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_INTERNAL_TRAFFIC, $variableList);
+        static::assertArrayHasKey(GoogleTagManagerStoreConnectorConstants::FIELD_SYSTEM, $variableList);
     }
 }

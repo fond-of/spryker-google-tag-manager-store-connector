@@ -7,10 +7,13 @@ use Spryker\Client\Store\StoreClientInterface;
 
 class GoogleTagManagerStoreConnectorToStoreClientBridge implements GoogleTagManagerStoreConnectorToStoreClientInterface
 {
+    /**
+     * @var \Spryker\Client\Store\StoreClientInterface
+     */
     protected $storeClient;
 
     /**
-     * @param \Spryker\Shared\Kernel\Store $store
+     * @param \Spryker\Client\Store\StoreClientInterface $storeClient
      */
     public function __construct(StoreClientInterface $storeClient)
     {

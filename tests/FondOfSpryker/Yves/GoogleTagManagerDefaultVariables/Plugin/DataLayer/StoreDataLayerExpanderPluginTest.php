@@ -14,7 +14,7 @@ class StoreDataLayerExpanderPluginTest extends Unit
     protected $factoryMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Model\StoreDataLayerExpanderInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpanderInterface
      */
     protected $storeDataLayerExpanderMock;
 
@@ -45,7 +45,7 @@ class StoreDataLayerExpanderPluginTest extends Unit
      */
     public function testIsApplicable(): void
     {
-        $this->assertIsBool($this->plugin->isApplicable('pageType', []));
+        static::assertIsBool($this->plugin->isApplicable('pageType', []));
     }
 
     /**
@@ -53,13 +53,13 @@ class StoreDataLayerExpanderPluginTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->factoryMock->expects($this->once())
+        $this->factoryMock->expects(static::once())
             ->method('createStoreDataLayerExpander')
             ->willReturn($this->storeDataLayerExpanderMock);
 
-        $this->storeDataLayerExpanderMock->expects($this->once())
+        $this->storeDataLayerExpanderMock->expects(static::once())
             ->method('expand');
 
-        $this->assertIsArray($this->plugin->expand('pageType', [], []));
+        static::assertIsArray($this->plugin->expand('pageType', [], []));
     }
 }
