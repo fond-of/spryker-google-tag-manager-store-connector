@@ -89,18 +89,14 @@ class StoreDataLayerExpander implements DataLayerExpanderInterface
      */
     protected function getEnviroment(): string
     {
-        if (!defined(APPLICATION_ENV)) {
+        if (getenv('APPLICATION_ENV') === false) {
             return '';
         }
 
-        if (APPLICATION_ENV === GoogleTagManagerStoreConnectorConstants::ENV_PRODUCTION) {
-            return 'Prod';
+        if (is_array(getenv('APPLICATION_ENV'))) {
+            return '';
         }
 
-        if (APPLICATION_ENV === GoogleTagManagerStoreConnectorConstants::ENV_STAGING) {
-            return 'Stage';
-        }
-
-        return 'Dev';
+        return getenv('APPLICATION_ENV');
     }
 }
