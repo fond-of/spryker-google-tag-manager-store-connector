@@ -97,6 +97,6 @@ class StoreDataLayerExpander implements DataLayerExpanderInterface
             return '';
         }
 
-        return 'Dev';
+        return getenv('APPLICATION_ENV');
     }
 }
