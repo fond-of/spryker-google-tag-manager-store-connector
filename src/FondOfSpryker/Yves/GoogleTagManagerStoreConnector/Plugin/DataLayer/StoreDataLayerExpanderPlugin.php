@@ -12,7 +12,7 @@ class StoreDataLayerExpanderPlugin extends AbstractPlugin implements GoogleTagMa
 {
     /**
      * @param string $pageType
-     * @param array $twigVariableBag
+     * @param array<string, string> $twigVariableBag
      *
      * @return bool
      */
@@ -23,10 +23,10 @@ class StoreDataLayerExpanderPlugin extends AbstractPlugin implements GoogleTagMa
 
     /**
      * @param string $page
-     * @param array $twigVariableBag
-     * @param array $dataLayer
+     * @param array<string, string> $twigVariableBag
+     * @param array<string, string|string> $dataLayer
      *
-     * @return array
+     * @return array<string, bool|string>
      */
     public function expand(string $page, array $twigVariableBag, array $dataLayer): array
     {

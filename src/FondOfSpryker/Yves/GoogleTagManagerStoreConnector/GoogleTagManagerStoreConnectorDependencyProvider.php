@@ -8,6 +8,9 @@ use Spryker\Yves\Kernel\Container;
 
 class GoogleTagManagerStoreConnectorDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const STORE_CLIENT = 'STORE_CLIENT';
 
     /**

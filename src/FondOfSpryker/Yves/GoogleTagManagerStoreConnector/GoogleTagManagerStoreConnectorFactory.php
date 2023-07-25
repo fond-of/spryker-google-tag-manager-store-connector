@@ -7,9 +7,6 @@ use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\DataLayerExpander
 use FondOfSpryker\Yves\GoogleTagManagerStoreConnector\Expander\StoreDataLayerExpander;
 use Spryker\Yves\Kernel\AbstractFactory;
 
-/**
- * @method \FondOfSpryker\Yves\GoogleTagManagerStoreConnector\GoogleTagManagerStoreConnectorConfig getConfig()
- */
 class GoogleTagManagerStoreConnectorFactory extends AbstractFactory
 {
     /**
@@ -17,10 +14,7 @@ class GoogleTagManagerStoreConnectorFactory extends AbstractFactory
      */
     public function createStoreDataLayerExpander(): DataLayerExpanderInterface
     {
-        return new StoreDataLayerExpander(
-            $this->getStoreClient(),
-            $this->getConfig()
-        );
+        return new StoreDataLayerExpander($this->getStoreClient());
     }
 
     /**
